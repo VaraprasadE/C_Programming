@@ -1,14 +1,32 @@
-output : isprime.o isoddeven.o Main.o
-	gcc isprime.c isoddeven.c Main.c -lm -o output
+# Compiler and flags
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c99
+LDFLAGS = -lm
 
-isprime.o:isprime.c
-	gcc -c isprime.c
+# Target executable
+TARGET = program
 
-isoddeven.o:isoddeven.c
-	gcc -c isoddeven.c
+# Source files
+SOURCES = Main.c isprime.c isoddeven.c
+OBJECTS = $(SOURCES:.c=.o)
+HEADERS = peo.h
 
-Main.o: Main.c
-	gcc -c Main.c
+# Default target
+all: $(TARGET)
 
+# Build target
+$(TARGET): $(OBJECTS)
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $(TARGET)
+
+# Compile source files to object files
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean build artifacts
 clean:
-	rm *.o output
+	rm -f *.o $(TARGET)
+
+# Force rebuild
+rebuild: clean all
+
+.PHONY: all clean rebuild

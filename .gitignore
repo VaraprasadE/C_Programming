@@ -1,0 +1,94 @@
+# Compiled Object files
+*.o
+*.obj
+
+# Executables
+*.exe
+*.out
+*.app
+*.elf
+
+# Static and dynamic libraries
+*.a
+*.so
+*.so.*
+*.dylib
+*.lib
+*.dll
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Core dump files
+core
+core.*
+
+# Temporary files
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+
+# IDE and editor files
+.vscode/
+.vs/
+*.vcxproj*
+*.sln
+*.suo
+*.user
+*.ncb
+*.aps
+*.plg
+*.opt
+*.clw
+*.tags
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build directories
+build/
+bin/
+obj/
+Debug/
+Release/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+!*/Makefile
+
+# Autotools
+.deps/
+.libs/
+*.la
+*.lo
+config.guess
+config.sub
+configure
+config.log
+config.status
+autom4te.cache/
+aclocal.m4
+
+# Project specific executables
+output
+MAIN
+threadInc
+nothreadInc
+
+# Backup files
+*.bak
+*.orig
