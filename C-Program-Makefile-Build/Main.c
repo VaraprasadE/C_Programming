@@ -1,6 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include "peo.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "number_utils.h"
 
 int main()
 {

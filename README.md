@@ -9,7 +9,7 @@ A collection of basic C programs with Makefile build system including:
 - **Main.c**: Main program that demonstrates prime number checking and odd/even number detection
 - **isprime.c**: Implementation of prime number checking algorithm
 - **isoddeven.c**: Implementation of odd/even number detection
-- **peo.h**: Header file containing function declarations
+- **number_utils.h**: Header file containing mathematical utility function declarations
 - **Makefile**: Advanced build configuration for compiling the project
 
 #### Building and Running

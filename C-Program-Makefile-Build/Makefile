@@ -9,7 +9,7 @@ TARGET = program
 # Source files
 SOURCES = Main.c isprime.c isoddeven.c
 OBJECTS = $(SOURCES:.c=.o)
-HEADERS = peo.h
+HEADERS = number_utils.h
 
 # Default target
 all: $(TARGET)
