@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cygwin Debug (Auto-Build)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "E:/cygwin/bin/gdb.exe",
+            "sourceFileMap": {
+                "/cygdrive/d": "D:/",
+                "/cygdrive/c": "C:/",
+                "/cygdrive/e": "E:/"
+            },
+            "preLaunchTask": "Build Active File"
+        }
+    ]
+}
