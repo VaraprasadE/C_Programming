@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 void printBinary(char n) {
     printf("\n");
@@ -22,6 +23,28 @@ unsigned char swapNibbles(unsigned char x){
     return (x >> 4) | (x << 4);
 }
 
+int swapIntegers(int num) {
+    return ((num >> 24) & 0xff) |      // Move byte 3 to byte 0
+           ((num << 8) & 0xff0000) |   // Move byte 1 to byte 2
+           ((num >> 8) & 0xff00) |     // Move byte 2 to byte 1
+           ((num << 24) & 0xff000000); // Move byte 0 to byte 3
+}
+
+void swapTwoIntegersNoExtraVariable(int* ptr1, int* ptr2) {
+    // Check if pointers are the same (swapping a variable with itself)
+    if (ptr1 == ptr2) {
+        return;
+    }
+    *ptr1 = *ptr1 ^ *ptr2; // num1 = 5 ^ 10 = 15
+    *ptr2 = *ptr1 ^ *ptr2; // num2 = 15 ^ 10 = 5 (original num1)
+    *ptr1 = *ptr1 ^ *ptr2; // num1 = 15 ^ 5 = 10 (original num2)
+}
+
+bool isPowerOfTwo(int n) {
+    // Check if n is positive and has only one bit set
+    return (n > 0) && ((n & (n - 1)) == 0);
+}
+
 void check_endianness() {
     unsigned int num = 1; 
     char *ptr = (char*)&num; 
@@ -29,9 +52,9 @@ void check_endianness() {
     // In Little Endian, the "1" is stored in the first byte (lowest address).
     // In Big Endian, the "1" is stored in the last byte.
     if (*ptr == 1) {
-        printf("Little Endian\n"); // Intel/ARM (usually)
+        printf("\n Little Endian\n"); // Intel/ARM (usually)
     } else {
-        printf("Big Endian\n");    // Network protocols/Old PowerPC
+        printf("\n Big Endian\n");    // Network protocols/Old PowerPC
     }
 }
 
@@ -58,6 +81,15 @@ int main() {
     char swapped = swapNibbles((unsigned char)num1);
     printBinary(swapped); // Output: 01100010 swapped nibbles = 00100110
     check_endianness();
+
+    int intNum = 0x12345678;
+    int swappedInt = swapIntegers(intNum);
+    printf("\nOriginal: 0x%x, Swapped: 0x%x\n", intNum, swappedInt);
+
+    int a = 5, b = 10;
+    printf("\n Before Swap: a = %d, b = %d\n", a, b);
+    swapTwoIntegersNoExtraVariable(&a, &b);
+    printf("\nAfter Swap: a = %d, b = %d\n", a, b);
 
     return 0;
 }
