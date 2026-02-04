@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdint.h>
-#define HW_REGISTER_ADR ((volatile uint32_t *)0x40001000)
+// #define HW_REGISTER_ADR ((volatile uint32_t *)0x40001000) // This is the actual hardware register address in a real embedded system.
+
+uint32_t virtual_register = 0;     
+volatile uint32_t *HW_REGISTER_ADR = &virtual_register; // For simulation purposes, we point to a virtual register in RAM instead of actual hardware.
+
 void configure_hardware(void);
 int main()
 {
