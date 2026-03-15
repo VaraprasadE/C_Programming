@@ -58,6 +58,15 @@ void check_endianness() {
     }
 }
 
+int countSetBits(uint32_t n) {
+    int count = 0;
+    while (n > 0) {
+        n &= (n - 1); // This trick clears the least significant set bit
+        count++;
+    }
+    return count;
+}
+
 int main() {
     char num = 10; // 00001010 in binary
     num |= (1<<2); // Set the 3rd bit
