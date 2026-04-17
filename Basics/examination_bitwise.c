@@ -97,8 +97,101 @@ void swapNumberXor(int *num1, int *num2){
 /************************* Level 1 ***************************/
 
 /************************* Level 2 ***************************/
+// 1. Find first set bit in a number
+
+// Looping method
+int8_t findFirstSetBit(uint16_t reg){
+    if(reg == 0) return -1;
+
+    for(int i = 0; i < 16; i++){
+        if((reg >> i) & 1){
+            return i;
+        }
+    }
+}
+
+// 2's complement method
+int8_t findFirstSetBit(uint16_t reg){
+    if(reg == 0) return -1;
+
+    uint16_t lsb = reg & (-reg);
+    int pos = 0;
+
+    while(lsb > 1){
+        lsb >>= 1;
+        pos++;
+    }
+    return pos;
+}
+
+// 2. Find last set bit in a number.
+int8_t findLastSetBit(uint16_t reg){
+    if(reg == 0) return -1;
+    for(int i = 15; i >= 0; i--){
+        if((reg>>i) & 1){
+            return i;
+        }
+    }
+}
+
+// 3. Reverse bits of an 8-bit number.
+uint8_t reverseByte(uint8_t *reg){
+    uint8_t result = 0;
+    for(int i=7; i>=0; i--){
+        if((*reg>>i) & 1){
+            result |= (1 << (7-i));
+        }
+    }
+    return result;
+}
+
+// 4. Swap even and odd bits.
+uint8_t swapOddEveBits(uint8_t *reg){
+    uint8_t oddBits = 0, evenBits = 0;
+    oddBits = *reg & 0xAA;
+    evenBits = *reg & 0x55;
+
+    oddBits >>= 1;
+    evenBits <<= 1;
+
+    return evenBits | oddBits;
+}
+
+// 5. Check if a number has only one bit set.
+bool checkOneSetBit(uint8_t *reg){
+    if((*reg != 0) && ((*reg & (*reg -1)) == 0)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+// 6. Clear all bits from MSB to nth bit.
+
+
+
+
 
 /************************* Level 2 ***************************/
+
+/************************* Level 3 ***************************/
+
+// 2.Find the missing number using XOR.
+
+uint16_t findMissNumberXOR(uint16_t *num, uint16_t arr_len){
+    uint16_t x1=0, x2=0;
+    for(int i = 0; i < arr_len; i++){
+        x1 ^= num[i];
+    }
+
+    for (int i = 1; i<=arr_len+1; i++){
+        x2 ^= i;
+    }
+    return x1 ^ x2;
+}
+
+/************************* Level 3 ***************************/
 
 
 int main(){
@@ -133,5 +226,4 @@ int main(){
     printf("a = %d, b = %d\n", a,b);
 
     /************************* Level 2 ***************************/
-
 }
