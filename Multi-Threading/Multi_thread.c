@@ -1,14 +1,14 @@
-// Comile with:
-// gcc -pthread -o threadtesttool threadtesttool.c
+// Compile with:
+// gcc -pthread -o threadInc.exe Multi_thread.c
 //
 
 //
-// Usage:
-// threadtesttool [[num_threads] num_primes_to_find]
+// Usage with threads:
+// threadInc.exe [num_threads] [num_primes_to_find]
 //
 // OR
 //
-// nothreadtesttool [[num_threads] num_primes_to_find]
+// threadInc.exe nothreadInc [num_primes_to_find]
 //
 
 #include <stdio.h>
@@ -36,12 +36,17 @@ int is_prime(unsigned int n) {
     return 1;*/
 
     unsigned int i;
-    for (i = 2; i <= sqrt(n); i++)
-    {
-        if(n%i==0){
+
+    if (n < 2) {
+        return 0;
+    }
+
+    for (i = 2; i <= n / i; i++) {
+        if (n % i == 0) {
             return 0;
         }
     }
+
     return 1;
 }
 
@@ -55,23 +60,32 @@ void * doSomeThing(void * arg) {
         i = i + 1;
     }
 
-    if(!gNoThreads)
-    	pthread_exit( & count);
+    if (!gNoThreads) {
+	    pthread_exit(NULL);
+    }
+
+    return NULL;
 }
 
 int main(int argc, char * argv[]) {
+    int argOffset = 1;
 
-    if(strstr(argv[0], "nothreadInc")!=NULL) {
+    if (strstr(argv[0], "nothreadInc") != NULL) {
 	   gNoThreads = 1;
     }
 
-    if (argc == 2) {
-        gPrimesToFind = (int) strtol(argv[1], NULL, 10);
+    if (argc > 1 && strcmp(argv[1], "nothreadInc") == 0) {
+	   gNoThreads = 1;
+	   argOffset = 2;
     }
 
-    if (argc == 3) {
-        gNumThreads = (int) strtol(argv[1], NULL, 10);
-        gPrimesToFind = (int) strtol(argv[2], NULL, 10);
+    if (argc - argOffset == 1) {
+        gPrimesToFind = (int) strtol(argv[argOffset], NULL, 10);
+    }
+
+    if (argc - argOffset == 2) {
+        gNumThreads = (int) strtol(argv[argOffset], NULL, 10);
+        gPrimesToFind = (int) strtol(argv[argOffset + 1], NULL, 10);
 
         if (gNumThreads > MAX_NUM_THREADS) {
             printf("Too many threads\n");
